@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Display URL Query Params</title>
+</head>
+<body>
+	<h1>URL Query Parameters</h1>
+	<div id="query-params"></div>
+
+	<script>
+		function getQueryParams() {
+			const params = new URLSearchParams(window.location.search);
+			const paramsDiv = document.getElementById('query-params');
+			params.forEach((value, key) => {
+				const paramElement = document.createElement('p');
+				paramElement.textContent = `${key}: ${value}`;
+				paramsDiv.appendChild(paramElement);
+			});
+		}
+
+		window.onload = getQueryParams;
+	</script>
+</body>
+</html>
