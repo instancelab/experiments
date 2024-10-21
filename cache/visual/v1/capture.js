@@ -40,14 +40,8 @@ const ItemRegistry = {
 	"PP-PROTO-RVNB-24": {
 		"display_name": "Revival Nut Butter 2024",
 		"item_description": "Great tasting nut butter that goes perfectly with the Jam",
-		"source": "Participating in the Revival Jam 2024",
+		"source": "Trying out the VisualCache prototype during the Revival Jam 2024",
 		"item_icon": "RVNB-24.jpeg",
-	},
-	"PP-PROTO-RXVP-24": {
-		"display_name": "VisualCache Prototype",
-		"item_description": "First ever protype of the VisualCache",
-		"source": "Trying out the VisualCache Prototype in 2024",
-		"item_icon": "VisualCache_Inverted_Transparent.png",
 	},
 	"PP-PROTO-DCSM-1": {
 		"display_name": "DeCo's Smile",
