@@ -20,15 +20,39 @@
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 			gap: 16px;
 		}
+
 		.inventory-item {
 			border: 1px solid #ccc;
 			padding: 16px;
 			border-radius: 8px;
 			text-align: center;
 		}
+
 		.inventory-item img {
 			max-width: 100%;
 			height: auto;
+		}
+
+		.code-type {
+			padding: 15px;
+			font-size: 16px;
+			border-radius: 8px;
+			border: 1px solid #ccc;
+			margin-right: 10px;
+		}
+
+		.code-submit {
+			background-color: gray;
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 8px;
 		}
 </style>
 </head>
@@ -37,9 +61,17 @@
 	<div id="query-params"></div>
 	
 	<hr />
+	<p>Want to add more items to your collection? Scan more VisualCache codes!</p>
+	<p>If you want to manually enter a code, enter here:</p>
+	<form action="capture.html" method="get">
+		<input class="code-type" type="text" name="code" placeholder="Enter code here" />
+		<button class="code-submit" type="submit">Submit VisualCache Code</button>
+  </form>
+	<hr />
 	<h1>Your Collection</h1>
 	<div id="inventory"></div>
-	
+	<hr />
+
 	<script src="capture.js"></script>
 	<script>
 		function getQueryParams() {
