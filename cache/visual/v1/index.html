@@ -46,6 +46,11 @@
 			text-align: center;
 		}
 		
+		.cache-card hr {
+			border: 1px solid white;
+			margin: 20px 0;
+		}
+
 		.cache-card img.logo {
 			max-width: 100%;
 			height: auto;
@@ -77,10 +82,11 @@
 		<li>Keep scanning VisualCache codes, and watch your collection grow!</li>
 	</ul>
 
-	<p>Here's a sample VisualCache code to get you started:</p>
-	<p>I've also added 5 collectible items to your inventory to get started!</p>
+	<p>To get you going, I've added 5 collectible items to your inventory to get started!</p>
+	<p>Below, you will see a VisualCache example so that you know what to look for, along with some example activities for where you might find VisualCaches. You won't always know where they're hiding, and that's part of the fun of discovery!</p>
 	<div class="cache-card">
 		<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
+		<hr />
 		<p>Scan this code with your phone's camera to see what's inside!</p>
 		<div id="qr-code"></div>
 		<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
@@ -107,7 +113,7 @@
 			height: 150
 		});
 
-		document.getElementById("code").textContent = sampleCode;
+		document.getElementById("code").textContent = sampleCode.split('_').join(' ');
 		</script>
 		</body>
 </html>

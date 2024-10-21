@@ -45,7 +45,11 @@
 			margin-right: auto;
 			text-align: center;
 		}
-		
+		.cache-card hr {
+			border: 1px solid white;
+			margin: 20px 0;
+		}
+
 		.cache-card img.logo {
 			max-width: 100%;
 			height: auto;
@@ -116,6 +120,7 @@
 			cacheElement.innerHTML = `
 				<div class="cache-card">
 				<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
+				<hr />
 				<p>Scan this code with your phone's camera to see what's inside!</p>
 				<div id="qr-code"></div>
 				<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
