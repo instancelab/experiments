@@ -47,14 +47,15 @@
 	<a href="instructions.html">
 		<p>Click here to go back!</p>
 	</a>
+	<script src="qrcode.min.js"></script>
 	<script>
 		const activity = new URLSearchParams(window.location.search).get('activity');
 		document.getElementById('activity').textContent = activity;
 
 		const activityDescription = {
-			museum: 'At a museum',
-			video: 'Watching a video',
-			game: 'Playing a game',
+			museum: 'At a museum because they have a special exhibit of a famous artwork',
+			video: 'Watching a very fun movie called "Workspace"',
+			game: 'Playing a great indie game about farming and building a community',
 			IRL: 'Finding a hidden object in real life',
 			treasure: 'Solving an online treasure hunt'
 		};
@@ -65,7 +66,41 @@
 			document.getElementById('activity').textContent = 'ERROR: I must have done a mistakey :0';
 		}
 
+		const cacheCode = {
+			museum: "temporary_moonlight_nightfall_luminous_lily",
+			video: "temporary_cresting_eastward_enable_unthread",
+			game: "temporary_bunkhouse_nappy_latch_earthly",
+			IRL: "temporary_duo_escalator_quicksand_obstruct",
+			treasure: "temporary_neuron_whacking_yield_deviator",
+		}
 
+		if (cacheCode[activity]) {
+			const cacheDiv = document.getElementById('cache');
+			const cacheElement = document.createElement('div');
+			const targetURL = `https://experiments.recollectible.io/cache/visual/v1/capture.html?code=${cacheCode[activity]}`;
+
+			cacheElement.innerHTML = `
+				<hr />
+				<h2>VisualCache Code</h2>
+				<p>Scan this code with your phone's camera to see what's inside!</p>
+				<div id="qr-code"></div>
+				<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
+				<p id="code">${cacheCode[activity]}</p>
+				<hr />
+			`;
+			cacheDiv.appendChild(cacheElement);
+
+			new QRCode(
+				document.getElementById('qr-code'),
+				{
+					text: targetURL,
+					width: 150,
+					height: 150
+				},
+			);
+		} else {
+			document.getElementById('cache').textContent = 'ERROR: I must have done a mistakey :0';
+		}
 	</script>
 	</body>
 	</html>

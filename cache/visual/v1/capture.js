@@ -55,6 +55,30 @@ const ItemRegistry = {
 		"source": "Reading through the end of the VisualCache description on itch.io in 2024",
 		"item_icon": "PLMB-2.png",
 	},
+	"PP-PROTO-MNLL-1": {
+		"display_name": "Monet Lily",
+		"item_description": "There's no debate that Lily is smiling in the painting :)",
+		"source": "Visiting the Lube Museum to see the Monet Lily in person",
+		"item_icon": "MNLL-1.png",
+	},
+	"PP-PROTO-LKPS-1": {
+		"display_name": "Lucky Purple Socks",
+		"item_description": "The same sock that the Governor is always wearing... Nobody knows why it was found at the local Orphanage",
+		"source": "Completing the Governor's character sidequest in 'Moonlit Field' in 2012",
+		"item_icon": "LKPS-1.png",
+	},
+	"PP-PROTO-GNEP-1": {
+		"display_name": "Giant Eggplant",
+		"item_description": "Our founding fathers, in their infinite wisdom, erected this statue at our capital to symbolize the importance of disseminating freedom and democracy",
+		"source": "Finding a hidden code near the Giant Eggplant Monument",
+		"item_icon": "GNEP-1.png",
+	},
+	"PP-PROTO-RKRL-1": {
+		"display_name": "Rick Rolls",
+		"item_description": "Never gonna give this joke up, never gonna let this habit down",
+		"source": "Finding the solution to a popular online treasure hunt published by fuzzbead.com",
+		"item_icon": "RKPRL-1.png",
+	},
 };
 
 //Key "DB"
@@ -63,12 +87,16 @@ const CodeRegistry = {
 	"temporary_raven_paddling_tabloid_trickily": "PP-PROTO-RVNB-24",
 	"temporary_elixir_ambiguity_patriot_overcrowd_helium": "PP-PROTO-RXVP-1",
 	"temporary_vocalize_voicing_chamber_craziness_trance": "PP-PROTO-DCSM-1",
+	"temporary_moonlight_nightfall_luminous_lily": "PP-PROTO-MNLL-1",
+	"temporary_cresting_eastward_enable_unthread": "PP-PROTO-PKST-1",
+	"temporary_bunkhouse_nappy_latch_earthly": "PP-PROTO-LKPS-1",
+	"temporary_duo_escalator_quicksand_obstruct": "PP-PROTO-GNEP-1",
+	"temporary_neuron_whacking_yield_deviator": "PP-PROTO-RKRL-1",
 };
 
 const Inventory = [
 	"PP-PROTO-PLMB-1",
 	"PP-PROTO-SCBK-1",
-	"PP-PROTO-PKST-1",
 	"PP-PROTO-PTPX-1",
 	"PP-PROTO-CMCB-1",
 	"PP-PROTO-ASNP-14",
