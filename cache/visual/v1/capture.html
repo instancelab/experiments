@@ -63,43 +63,13 @@
 	<hr />
 	<p>Want to add more items to your collection? Scan more VisualCache codes!</p>
 	<p>If you want to manually enter a code, enter here:</p>
-	<form action="capture.html" method="get">
-		<input class="code-type" type="text" name="code" placeholder="Enter code here" />
-		<button class="code-submit" type="submit">Submit VisualCache Code</button>
-  </form>
+	<input class="code-type" id="code-type" type="text" name="code" placeholder="Enter code here" />
+	<button class="code-submit" id="code-submit">Submit VisualCache Code</button>
 	<hr />
 	<h1>Your Collection</h1>
 	<div id="inventory"></div>
 	<hr />
 
 	<script src="capture.js"></script>
-	<script>
-		function getQueryParams() {
-			const params = new URLSearchParams(window.location.search);
-			const paramsDiv = document.getElementById('query-params');
-			params.forEach((value, key) => {
-				const paramElement = document.createElement('p');
-				paramElement.textContent = `${key}: ${value}`;
-				paramsDiv.appendChild(paramElement);
-			});
-		}
-		
-		window.onload = getQueryParams;
-		
-		const inventoryDiv = document.getElementById('inventory');
-		
-		Inventory.forEach(itemCode => {
-			const item = ItemRegistry[itemCode];
-			const itemElement = document.createElement('div');
-			itemElement.innerHTML = `
-				<h2>${item.display_name}</h2>
-				<p>${item.item_description}</p>
-				<p><strong>Obtained by:</strong> ${item.source}</p>
-				<img src="${item.item_icon}" alt="${item.display_name}" />
-			`;
-			inventoryDiv.appendChild(itemElement);
-		});
-		
-	</script>
 </body>
 </html>

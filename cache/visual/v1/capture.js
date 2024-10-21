@@ -94,10 +94,93 @@ const CodeRegistry = {
 	"temporary_neuron_whacking_yield_deviator": "PP-PROTO-RKRL-1",
 };
 
-const Inventory = [
+// Load Inventory from localStorage if it exists
+//Instantiate otherwise
+let Inventory = JSON.parse(localStorage.getItem('inventory')) || [
 	"PP-PROTO-PLMB-1",
 	"PP-PROTO-SCBK-1",
 	"PP-PROTO-PTPX-1",
 	"PP-PROTO-CMCB-1",
 	"PP-PROTO-ASNP-14",
 ];
+console.log(Inventory);
+
+function displayInventory() {
+	const inventoryDiv = document.getElementById('inventory');
+	inventoryDiv.innerHTML = '';
+	Inventory.forEach(itemCode => {
+		const item = ItemRegistry[itemCode];
+		const itemElement = document.createElement('div');
+		itemElement.innerHTML = `
+			<h2>${item.display_name}</h2>
+			<p>${item.item_description}</p>
+			<p><strong>Obtained by:</strong> ${item.source}</p>
+			<img src="${item.item_icon}" alt="${item.display_name}" />
+		`;
+		inventoryDiv.appendChild(itemElement);
+	});
+}
+
+// Reset/Initialize Inventory for debugging purposes
+Window.resetInventory = function() {
+	Inventory = [
+		"PP-PROTO-PLMB-1",
+		"PP-PROTO-SCBK-1",
+		"PP-PROTO-PTPX-1",
+		"PP-PROTO-CMCB-1",
+		"PP-PROTO-ASNP-14",
+	];
+	localStorage.setItem('inventory', JSON.stringify(Inventory));
+	location.reload();
+}
+
+// Function to get code from query params and add applicable item to the inventory
+function addItemFromQueryParams() {
+	const urlParams = new URLSearchParams(window.location.search);
+	const code = urlParams.get('code');
+	if (code && CodeRegistry[code]) {
+		const itemId = CodeRegistry[code];
+		if (!Inventory.includes(itemId)) {
+			Inventory.push(itemId);
+			localStorage.setItem('inventory', JSON.stringify(Inventory));
+			console.log(`Item ${itemId} added to inventory.`);
+			alert(`Yay! ${ItemRegistry[itemId].display_name} has been added to your inventory!`);
+			displayInventory();
+		} else {
+			console.log(`Item ${itemId} is already in the inventory.`);
+		}
+	} else {
+		console.log('Invalid or missing code in query params.');
+	}
+}
+
+// Function to take manually entered code from the form and add applicable item
+function addItemFromForm() {
+	let codeInput = document.getElementById('code-type').value;
+	console.log(codeInput);
+	codeInput = codeInput.split(' ').join('_');
+	console.log(codeInput);
+	if (codeInput && CodeRegistry[codeInput]) {
+		const itemId = CodeRegistry[codeInput];
+		if (!Inventory.includes(itemId)) {
+			Inventory.push(itemId);
+			localStorage.setItem('inventory', JSON.stringify(Inventory));
+			alert(`Yay! ${ItemRegistry[itemId].display_name} has been added to your inventory!`);
+			console.log(`Item ${itemId} added to inventory.`);
+			displayInventory();
+		} else {
+			console.log(`Item ${itemId} is already in the inventory.`);
+		}
+	} else {
+		console.log('Invalid or missing code.');
+	}
+}
+
+// Attach the function as an onclick listener to button#code-submit
+document.getElementById('code-submit').onclick = addItemFromForm;
+
+// Display the inventory on page load
+displayInventory();
+
+// Call the function to add item from query params if present
+addItemFromQueryParams();
