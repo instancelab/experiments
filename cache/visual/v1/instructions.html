@@ -33,6 +33,36 @@
 			max-width: 100%;
 			height: auto;
 		}
+		.cache-card {
+			border: 2px solid white;
+			border-radius: 12px;
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			margin-top: 20px;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+		
+		.cache-card img.logo {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+		}
+
+		.cache-card #qr-code {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid white;
+			padding: 10px;
+			border-radius: 8px;
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
 </style>
 </head>
 <body>
@@ -48,7 +78,13 @@
 	</ul>
 
 	<p>Here's a sample VisualCache code to get you started:</p>
-
+	<div class="cache-card">
+		<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
+		<p>Scan this code with your phone's camera to see what's inside!</p>
+		<div id="qr-code"></div>
+		<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
+		<p id="code"></p>
+	</div>
 	<p>Now, here are some example activities during which you might encounter VisualCache codes:</p>
 	<ul>
 		<li><a href="activity.html?activity=museum">At a museum</a></li>
@@ -59,5 +95,18 @@
 	</ul>
 
 	<p>Click on each activity above to see a sample VisualCache code!</p>
+	<script src="qrcode.min.js"></script>
+	<script>
+		const sampleCode = "temporary_raven_paddling_tabloid_trickily";
+		const targetURL = `https://experiments.recollectible.io/cache/visual/v1/capture.html?code=${sampleCode}`;
 
+		new QRCode(document.getElementById("qr-code"), {
+			text: targetURL,
+			width: 150,
+			height: 150
+		});
+
+		document.getElementById("code").textContent = sampleCode;
+		</script>
+		</body>
 </html>

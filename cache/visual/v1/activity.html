@@ -33,6 +33,36 @@
 			max-width: 100%;
 			height: auto;
 		}
+		.cache-card {
+			border: 2px solid white;
+			border-radius: 12px;
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			margin-top: 20px;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+		
+		.cache-card img.logo {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+		}
+
+		.cache-card #qr-code {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid white;
+			padding: 10px;
+			border-radius: 8px;
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
 </style>
 </head>
 <body>
@@ -42,19 +72,21 @@
 	</a>
 	<p>While:</p>
 	<p id="activity"></p>
-	<p>You find a VisualCache code! Scan it with your phone's camera to see what's inside!</p>
+	<p>You find a VisualCache code!</p>
+	<p> Scan it with your phone's camera to see what's inside!</p>
 	<div id="cache"></div>
 	<a href="instructions.html">
 		<p>Click here to go back!</p>
 	</a>
+	<script src="qrcode.min.js"></script>
 	<script>
 		const activity = new URLSearchParams(window.location.search).get('activity');
 		document.getElementById('activity').textContent = activity;
 
 		const activityDescription = {
-			museum: 'At a museum',
-			video: 'Watching a video',
-			game: 'Playing a game',
+			museum: 'At a museum because they have a special exhibit of a famous artwork',
+			video: 'Watching a very fun movie called "Workspace"',
+			game: 'Playing a great indie game about farming and building a community',
 			IRL: 'Finding a hidden object in real life',
 			treasure: 'Solving an online treasure hunt'
 		};
@@ -65,7 +97,44 @@
 			document.getElementById('activity').textContent = 'ERROR: I must have done a mistakey :0';
 		}
 
+		const cacheCode = {
+			museum: "temporary_moonlight_nightfall_luminous_lily",
+			video: "temporary_cresting_eastward_enable_unthread",
+			game: "temporary_bunkhouse_nappy_latch_earthly",
+			IRL: "temporary_duo_escalator_quicksand_obstruct",
+			treasure: "temporary_neuron_whacking_yield_deviator",
+			smile: "temporary_vocalize_voicing_chamber_craziness_trance",
+			butter: "temporary_raven_paddling_tabloid_trickily",
+		}
 
+		if (cacheCode[activity]) {
+			const cacheDiv = document.getElementById('cache');
+			const cacheElement = document.createElement('div');
+			const targetURL = `https://experiments.recollectible.io/cache/visual/v1/capture.html?code=${cacheCode[activity]}`;
+			const readableCode = cacheCode[activity].split('_').join('  ');
+
+			cacheElement.innerHTML = `
+				<div class="cache-card">
+				<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
+				<p>Scan this code with your phone's camera to see what's inside!</p>
+				<div id="qr-code"></div>
+				<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
+				<p id="code">${readableCode}</p>
+				</div>
+			`;
+			cacheDiv.appendChild(cacheElement);
+
+			new QRCode(
+				document.getElementById('qr-code'),
+				{
+					text: targetURL,
+					width: 150,
+					height: 150
+				},
+			);
+		} else {
+			document.getElementById('cache').textContent = 'ERROR: I must have done a mistakey :0';
+		}
 	</script>
 	</body>
 	</html>
