@@ -33,6 +33,36 @@
 			max-width: 100%;
 			height: auto;
 		}
+		.cache-card {
+			border: 2px solid white;
+			border-radius: 12px;
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			margin-top: 20px;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+		
+		.cache-card img.logo {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+		}
+
+		.cache-card #qr-code {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid white;
+			padding: 10px;
+			border-radius: 8px;
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
 </style>
 </head>
 <body>
@@ -42,7 +72,8 @@
 	</a>
 	<p>While:</p>
 	<p id="activity"></p>
-	<p>You find a VisualCache code! Scan it with your phone's camera to see what's inside!</p>
+	<p>You find a VisualCache code!</p>
+	<p> Scan it with your phone's camera to see what's inside!</p>
 	<div id="cache"></div>
 	<a href="instructions.html">
 		<p>Click here to go back!</p>
@@ -78,15 +109,16 @@
 			const cacheDiv = document.getElementById('cache');
 			const cacheElement = document.createElement('div');
 			const targetURL = `https://experiments.recollectible.io/cache/visual/v1/capture.html?code=${cacheCode[activity]}`;
+			const readableCode = cacheCode[activity].split('_').join('  ');
 
 			cacheElement.innerHTML = `
-				<hr />
-				<h2>VisualCache Code</h2>
+				<div class="cache-card">
+				<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
 				<p>Scan this code with your phone's camera to see what's inside!</p>
 				<div id="qr-code"></div>
 				<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
-				<p id="code">${cacheCode[activity]}</p>
-				<hr />
+				<p id="code">${readableCode}</p>
+				</div>
 			`;
 			cacheDiv.appendChild(cacheElement);
 
