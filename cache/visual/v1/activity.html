@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ReExhbiit VisualCachce Prototype</title>
+	<style>
+		html {
+			font-family: Roboto, Arial, sans-serif;
+			padding: 16px;
+			background-color: orange;
+			color: white;
+			font-size: large;
+		}
+
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		#inventory {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 16px;
+		}
+		.inventory-item {
+			border: 1px solid #ccc;
+			padding: 16px;
+			border-radius: 8px;
+			text-align: center;
+		}
+		.inventory-item img {
+			max-width: 100%;
+			height: auto;
+		}
+</style>
+</head>
+<body>
+	<h1>ReExhibit VisualCache Prototype</h1>
+	<a href="instructions.html">
+		<p>Click here to go back!</p>
+	</a>
+	<p>While:</p>
+	<p id="activity"></p>
+	<p>You find a VisualCache code! Scan it with your phone's camera to see what's inside!</p>
+	<div id="cache"></div>
+	<a href="instructions.html">
+		<p>Click here to go back!</p>
+	</a>
+	<script>
+		const activity = new URLSearchParams(window.location.search).get('activity');
+		document.getElementById('activity').textContent = activity;
+
+		const activityDescription = {
+			museum: 'At a museum',
+			video: 'Watching a video',
+			game: 'Playing a game',
+			IRL: 'Finding a hidden object in real life',
+			treasure: 'Solving an online treasure hunt'
+		};
+
+		if (activityDescription[activity]) {
+			document.getElementById('activity').textContent = activityDescription[activity];
+		} else {
+			document.getElementById('activity').textContent = 'ERROR: I must have done a mistakey :0';
+		}
+
+
+	</script>
+	</body>
+	</html>
