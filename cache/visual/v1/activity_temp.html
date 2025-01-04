@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ReExhbiit VisualCachce Prototype</title>
+	<style>
+		html {
+			font-family: Roboto, Arial, sans-serif;
+			padding: 16px;
+			background-color: hsla(19, 90%, 55%, 1);
+			color: white;
+			font-size: large;
+		}
+
+		body {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		#inventory {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 16px;
+		}
+		.inventory-item {
+			border: 1px solid #ccc;
+			padding: 16px;
+			border-radius: 8px;
+			text-align: center;
+		}
+		.inventory-item img {
+			max-width: 100%;
+			height: auto;
+		}
+		.cache-card {
+			border: 2px solid white;
+			border-radius: 12px;
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			margin-top: 20px;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+		.cache-card hr {
+			border: 1px solid white;
+			margin: 2rem 0;
+		}
+
+		.cache-card img.logo {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.cache-card #qr-code {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid white;
+			padding: 10px;
+			border-radius: 8px;
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
+</style>
+</head>
+<body>
+	<h1>ReExhibit VisualCache Prototype</h1>
+	<a href="index.html">
+		<p>Click here to go back!</p>
+	</a>
+	<p>While:</p>
+	<p id="activity"></p>
+	<p>You find a VisualCache code!</p>
+	<p> Scan it with your phone's camera to see what's inside!</p>
+	<div id="cache"></div>
+	<a href="index.html">
+		<p>Click here to go back!</p>
+	</a>
+	<script src="qrcode.min.js"></script>
+	<script>
+		const activity = new URLSearchParams(window.location.search).get('activity');
+		document.getElementById('activity').textContent = activity;
+
+		const activityDescription = {
+			museum: 'At a museum because they have a special exhibit of a famous artwork',
+			video: 'Watching a very fun movie called "Workspace"',
+			game: 'Playing a great indie game about farming and building a community',
+			IRL: 'Touring a famous national monument in real life',
+			treasure: 'Solving an online treasure hunt that is going viral'
+		};
+
+		if (activityDescription[activity]) {
+			document.getElementById('activity').textContent = activityDescription[activity];
+		} else {
+			document.getElementById('activity').textContent = 'ERROR: I must have done a mistakey :0';
+		}
+
+		const cacheCode = {
+			museum: "demo_fraction_easter_default_idiom", //that was easy
+			video: "demo_fading_record_suspend_rounding",
+			game: "temporary_bunkhouse_nappy_latch_earthly",
+			IRL: "temporary_duo_escalator_quicksand_obstruct",
+			treasure: "temporary_neuron_whacking_yield_deviator",
+			smile: "temporary_vocalize_voicing_chamber_craziness_trance",
+			butter: "temporary_raven_paddling_tabloid_trickily",
+		}
+
+		if (cacheCode[activity]) {
+			const cacheDiv = document.getElementById('cache');
+			const cacheElement = document.createElement('div');
+			const targetURL = `https://app.reexhibit.com/Collect/visual_cache_v1?code=${cacheCode[activity]}`;
+			const readableCode = cacheCode[activity].split('_').join('  ');
+
+			cacheElement.innerHTML = `
+				<div class="cache-card">
+				<img class="logo" src="assets/VisualCache_Inverted_Transparent.png" />
+				<hr />
+				<p>Scan this code with your phone's camera to see what's inside!</p>
+				<div id="qr-code"></div>
+				<p>Don't want to scan the code? You can also manually enter the code on your collection page:</p>
+				<p id="code">${readableCode}</p>
+				</div>
+			`;
+			cacheDiv.appendChild(cacheElement);
+
+			new QRCode(
+				document.getElementById('qr-code'),
+				{
+					text: targetURL,
+					width: 150,
+					height: 150
+				},
+			);
+		} else {
+			document.getElementById('cache').textContent = 'ERROR: I must have done a mistakey :0';
+		}
+	</script>
+	</body>
+	</html>
